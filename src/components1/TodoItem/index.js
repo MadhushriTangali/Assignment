@@ -50,7 +50,7 @@ const TodoItem = props => {
             type="checkbox"
             id={id}
           />
-          <p className={`title${isChecked}`}>{title}</p>
+          <p className={`title ${isChecked}`}>{title}</p>
           <button type="button" className="button" onClick={editTodo}>
             Edit
           </button>

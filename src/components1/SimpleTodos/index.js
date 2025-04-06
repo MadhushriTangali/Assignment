@@ -39,7 +39,7 @@ const initialTodosList = [
 
 // Write your code here
 class SimpleTodos extends Component {
-  state = {todosList: initialTodosList, todo: ''}
+  state = {todosList: initialTodosList, todo: '', count: 1}
 
   deleteTodo = id => {
     const {todosList} = this.state
@@ -52,17 +52,24 @@ class SimpleTodos extends Component {
     this.setState({todo: event.target.value})
   }
 
-  addTodo = () => {
-    const {todo, todosList} = this.state
+  onChangeCount = event => {
+    this.setState({count: event.target.value})
+  }
 
-    const newTodo = {
-      id: todosList.length + 1,
-      title: todo,
+  addTodo = () => {
+    const {todo, todosList, count} = this.state
+
+    for (let i = 0; i < count; i += 1) {
+      const newTodo = {
+        id: todosList.length + 1 + i,
+        title: todo,
+      }
+      this.setState(prevState => ({
+        todosList: [...prevState.todosList, newTodo],
+        todo: '',
+        count: 1,
+      }))
     }
-    this.setState(prevState => ({
-      todosList: [...prevState.todosList, newTodo],
-      todo: '',
-    }))
   }
 
   onEditTask = (id, taskTitle) => {
@@ -77,7 +84,7 @@ class SimpleTodos extends Component {
   }
 
   render() {
-    const {todosList, todo} = this.state
+    const {todosList, todo, count} = this.state
     return (
       <div className="outer-container">
         <div className="todo-container">
@@ -89,6 +96,12 @@ class SimpleTodos extends Component {
               className="input-text"
               onChange={this.onChangeTodo}
               value={todo}
+            />
+            <input
+              type="number"
+              className="input-text"
+              value={count}
+              onChange={this.onChangeCount}
             />
             <button type="button" className="add-btn" onClick={this.addTodo}>
               Add Todo

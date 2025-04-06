@@ -1,7 +1,7 @@
-import SimpleTodos from './components/SimpleTodos'
+import TaskTracker from './components/TaskTracker'
 
 import './App.css'
 
-const App = () => <SimpleTodos />
+const App = () => <TaskTracker />
 
 export default App
